@@ -18,22 +18,28 @@ var config = {
 
 var player;
 var cursors;
+var platforms;
 
 var game = new Phaser.Game(config);
 
 function preload() {
   this.load.image('sky', './assets/imgs/sky.png');
+  this.load.image('ground', './assets/imgs/platform.png');
   this.load.spritesheet('stand', './assets/imgs/stand2.png', { frameWidth: 41.8, frameHeight: 55 });
   this.load.spritesheet('run-left', './assets/imgs/run-left.png', { frameWidth: 57, frameHeight: 50 });
   this.load.spritesheet('run-right', './assets/imgs/run-right.png', { frameWidth: 57, frameHeight: 50 });
+  this.load.spritesheet('jump', './assets/imgs/jump.png', { frameWidth: 57, frameHeight: 50 });
 }
 
 function create() {
+  //BACKGROUND
   this.add.image(400, 300, 'sky');
 
-  player = this.physics.add.sprite(100, 450, 'stand');
+  //PLAYER
+  player = this.physics.add.sprite(100, 450, 'stand').setScale(1.5);
   player.setBounce(0.2);
   player.setCollideWorldBounds(true);
+  player.body.setGravityY(200);
 
   //  Our player animations, turning, walking left and walking right.
   this.anims.create({
@@ -58,6 +64,20 @@ function create() {
 
   cursors = this.input.keyboard.createCursorKeys();
 
+  
+
+  //PLATFORMS
+  platforms = this.physics.add.staticGroup();
+
+  platforms.create(400, 690, 'ground').setScale(3).refreshBody();
+
+  // platforms.create(600, 400, 'ground');
+  // platforms.create(50, 250, 'ground');
+  // platforms.create(750, 220, 'ground');
+
+
+  this.physics.add.collider(player, platforms);
+
 }
 
 function update() {
@@ -78,6 +98,6 @@ function update() {
   }
 
   if (cursors.up.isDown && player.body.touching.down) {
-      player.setVelocityY(-330);
+      player.setVelocityY(-400);
   }
 }
