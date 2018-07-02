@@ -37,7 +37,7 @@ function create() {
 
   //PLAYER
   player = this.physics.add.sprite(100, 450, 'stand').setScale(1.5);
-  player.setBounce(0.2);
+  // player.setBounce(0.2);
   player.setCollideWorldBounds(true);
   player.body.setGravityY(200);
 
@@ -61,6 +61,13 @@ function create() {
       frameRate: 10,
       repeat: -1
   });
+
+  this.anims.create({
+    key: 'up',
+    frames: this.anims.generateFrameNumbers('jump', { start: 0, end: 2 }),
+    frameRate: 1,
+    repeat: -1
+});
 
   cursors = this.input.keyboard.createCursorKeys();
 
@@ -97,7 +104,15 @@ function update() {
       player.anims.play('turn', true);
   }
 
-  if (cursors.up.isDown && player.body.touching.down) {
+  if (cursors.up.isDown){
+    player.anims.play('up', true);
+
+    if(player.body.touching.down) {
       player.setVelocityY(-400);
+    }
+  } 
+
+  if(!player.body.touching.down) {
+    player.anims.play('up', true);
   }
 }
