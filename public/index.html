@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="//cdn.jsdelivr.net/npm/phaser@3.0.0/dist/phaser.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.1.1/dist/phaser.js"></script>
 </head>
 <body>
 
@@ -13,7 +13,7 @@
         physics: {
             default: 'arcade',
             arcade: {
-                gravity: { y: 200 }
+                gravity: { y: 300 }
             }
         },
         scene: {
@@ -22,17 +22,24 @@
         }
     };
 
+    var player;
+
     var game = new Phaser.Game(config);
 
     function preload ()
     {
-        
+        this.load.image('sky', './assets/sky.png');
+        this.load.image('stand', './assets/stand.png', {  frameWidth: 32, frameHeight: 48  });   
     }
 
     function create ()
     {
-        
+        this.add.image(400, 300, 'sky');
+
+        player = this.physics.add.sprite(100, 450, 'stand');
+
     }
+
     </script>
 
 </body>
