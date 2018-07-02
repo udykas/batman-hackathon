@@ -29,6 +29,8 @@ function preload() {
   this.load.spritesheet('run-left', './assets/imgs/run-left.png', { frameWidth: 57, frameHeight: 50 });
   this.load.spritesheet('run-right', './assets/imgs/run-right.png', { frameWidth: 57, frameHeight: 50 });
   this.load.spritesheet('jump', './assets/imgs/jump.png', { frameWidth: 57, frameHeight: 50 });
+  this.load.spritesheet('jump-left', './assets/imgs/jump-left.png', { frameWidth: 57, frameHeight: 50 });
+  this.load.spritesheet('crouch', './assets/imgs/crouch.png', { frameWidth: 57, frameHeight: 50 });
 }
 
 function create() {
@@ -50,7 +52,7 @@ function create() {
   });
 
   this.anims.create({
-      key: 'turn',
+      key: 'stand',
       frames: this.anims.generateFrameNumbers('stand', { start: 0, end: 16 }),
       frameRate: 5
   });
@@ -67,7 +69,22 @@ function create() {
     frames: this.anims.generateFrameNumbers('jump', { start: 0, end: 2 }),
     frameRate: 1,
     repeat: -1
-});
+  });
+
+  this.anims.create({
+    key: 'up-left',
+    frames: this.anims.generateFrameNumbers('jump-left', { start: 0, end: 2 }),
+    frameRate: 1,
+    repeat: -1
+  });
+
+  //CROUCH NOT ANIMATING
+  // this.anims.create({
+  //   key: 'down',
+  //   frames: [ { key: 'crouch', frame: 2 } ],
+  //   frameRate: 1,
+  //   repeat: -1
+  // });
 
   cursors = this.input.keyboard.createCursorKeys();
 
@@ -101,7 +118,7 @@ function update() {
   else {
       player.setVelocityX(0);
 
-      player.anims.play('turn', true);
+      player.anims.play('stand', true);
   }
 
   if (cursors.up.isDown){
@@ -114,7 +131,18 @@ function update() {
 
   if(!player.body.touching.down) {
     player.anims.play('up', true);
+
+    if(cursors.left.isDown){
+      player.anims.play('up-left', true);
+    }
   }
 
-  
+  if(cursors.up.isDown && cursors.left.isDown){
+    player.anims.play('up-left', true);
+  }
+
+  //NOT WORKING
+  // if(cursors.down.isDown){
+  //   player.anims.play('crouch', false);
+  // }
 }
