@@ -1,46 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <script src="//cdn.jsdelivr.net/npm/phaser@3.1.1/dist/phaser.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/phaser@3.0.0/dist/phaser.min.js"></script>
 </head>
+
 <body>
 
-    <script>
-    var config = {
-        type: Phaser.AUTO,
-        width: 800,
-        height: 600,
-        physics: {
-            default: 'arcade',
-            arcade: {
-                gravity: { y: 300 }
-            }
-        },
-        scene: {
-            preload: preload,
-            create: create
-        }
-    };
-
-    var player;
-
-    var game = new Phaser.Game(config);
-
-    function preload ()
-    {
-        this.load.image('sky', './assets/sky.png');
-        this.load.image('stand', './assets/stand.png', {  frameWidth: 32, frameHeight: 48  });   
-    }
-
-    function create ()
-    {
-        this.add.image(400, 300, 'sky');
-
-        player = this.physics.add.sprite(100, 450, 'stand');
-
-    }
-
-    </script>
+  <!-- <script type="text/javascript" src="../build/index.js"></script> -->
+  <script src="./game.js"></script>
 
 </body>
+
 </html>
