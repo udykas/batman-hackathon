@@ -1,3 +1,6 @@
+const gameMenu = require('./scenes/game_menu');
+const testScene = require('./scenes/test_scene');
+
 var config = {
   type: Phaser.AUTO,
   width: 800,
@@ -9,11 +12,7 @@ var config = {
           debug: false
       }
   },
-  scene: {
-      preload: preload,
-      create: create,
-      update: update
-  }
+  scene: [ gameMenu, testScene ]
 };
 
 var player;
@@ -23,12 +22,14 @@ var game = new Phaser.Game(config);
 
 function preload() {
   this.load.image('sky', './assets/imgs/sky.png');
+  this.load.image('game-menu', './assets/imgs/menuimage.jpg');
   this.load.spritesheet('stand', './assets/imgs/stand2.png', { frameWidth: 41.8, frameHeight: 55 });
   this.load.spritesheet('run-left', './assets/imgs/run-left.png', { frameWidth: 57, frameHeight: 50 });
   this.load.spritesheet('run-right', './assets/imgs/run-right.png', { frameWidth: 57, frameHeight: 50 });
 }
 
 function create() {
+  this.add.image(400, 300, 'game-menu');
   this.add.image(400, 300, 'sky');
 
   player = this.physics.add.sprite(100, 450, 'stand');
@@ -62,9 +63,10 @@ function create() {
 
 function update() {
   if (cursors.left.isDown) {
-      player.setVelocityX(-160);
+    console.log('hello')
+      // player.setVelocityX(-160);
 
-      player.anims.play('left', true);
+      // player.anims.play('left', true);
   }
   else if (cursors.right.isDown) {
       player.setVelocityX(160);
