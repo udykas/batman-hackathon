@@ -115,4 +115,6 @@ function update() {
   if(!player.body.touching.down) {
     player.anims.play('up', true);
   }
+
+  
 }
