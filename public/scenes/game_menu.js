@@ -1,4 +1,12 @@
+/** 
+ * TODO: Andrew take a look at design
+ */  
+
 const { Scene } = Phaser;
+
+let button;
+let camera;
+let cursors;
 
 class GameMenu extends Scene {
   constructor() {
@@ -10,14 +18,29 @@ class GameMenu extends Scene {
   }
 
   create() {
-    this.button = this.add.sprite(400, 595, 'gameMenu').setInteractive();
-    this.button.on('pointerdown', () => {
-      this.scene.start('MainGameScene')
+    this.add.sprite(400, 591, 'gameMenu');
+
+    const playBtn = this.add.text(350, 800, 'P l a y', { fontSize: 30, color: '#00ff00' }).setInteractive();
+    camera = this.cameras.main;
+    cursors = this.input.keyboard.createCursorKeys();
+
+
+    camera.useBounds = true;
+    camera._bounds.height = 1100;
+    
+    playBtn.on('pointerdown', e => {
+      this.scene.start('MainGameScene');
     });
-
+    
+    console.log(camera);
   }
+  
+  update() {
+    camera.scrollY += 3;
 
-  update() {}
+    // keep this
+    // if (this.input.activePointer.justDown) console.log('hello');
+  }
 }
 
 module.exports = GameMenu;
