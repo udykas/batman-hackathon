@@ -141,7 +141,7 @@ function update() {
     player.anims.play('up-left', true);
   }
 
-  //NOT WORKING
+  //NOT
   // if(cursors.down.isDown){
   //   player.anims.play('crouch', false);
   // }
