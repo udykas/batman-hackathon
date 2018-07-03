@@ -87,14 +87,31 @@ class MainGameScene extends Scene {
     //PLATFORMS
     platforms = this.physics.add.staticGroup();
 
+    //FLOOR
     platforms.create(300, 1120, 'ground').setScale(15).refreshBody();
 
+    //FIRST PLATFORMS
     platforms.create(200, 440, 'ground').setScale(0.25).refreshBody();
     platforms.create(300, 410, 'ground').setScale(0.25).refreshBody();
     platforms.create(400, 410, 'ground').setScale(0.25).refreshBody();
     platforms.create(450, 410, 'ground').setScale(0.25).refreshBody();
     platforms.create(500, 410, 'ground').setScale(0.25).refreshBody();
 
+    //SECOND PLATFORMS
+    platforms.create(700, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(750, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(800, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(850, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(900, 300, 'ground').setScale(0.25).refreshBody();
+
+    platforms.create(1090, 150, 'ground').setScale(0.25).refreshBody();
+
+    //THIRD PLATFORMS
+    platforms.create(1275, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(1325, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(1375, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(1425, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(1475, 300, 'ground').setScale(0.25).refreshBody();
 
 
     this.physics.add.collider(player, platforms);
