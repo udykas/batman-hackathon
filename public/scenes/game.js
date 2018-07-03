@@ -153,8 +153,6 @@ class MainGameScene extends Scene {
 
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: 'white' });
 
-    console.log(this.scoreText)
-
 
     //PHYSICS
     this.physics.add.collider(player, platforms);
