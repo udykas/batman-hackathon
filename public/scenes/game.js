@@ -257,9 +257,9 @@ class MainGameScene extends Scene {
       player.anims.play('up-left', true);
     }
 
-    if (score >= 10) {
+    if (score >= 190) {
       this.scene.start('Win');
-      gameMusic.stop();
+      
     }
   }
 

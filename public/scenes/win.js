@@ -8,7 +8,7 @@ class Win extends Scene {
   preload() {}
 
   create() {
-    const winText = this.add.text(0, 0, 'You\'re the hero Gotham deserves, but now the one they need right now...');
+    const winText = this.add.text(0, 0, 'You\'re the hero Gotham deserves, but not the one they need right now...');
   }
 
   update() {}
