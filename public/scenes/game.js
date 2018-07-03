@@ -121,6 +121,28 @@ class MainGameScene extends Scene {
     platforms.create(1425, 300, 'ground').setScale(0.25).refreshBody();
     platforms.create(1475, 300, 'ground').setScale(0.25).refreshBody();
 
+    //FIFTH PLATFORMS
+    platforms.create(1700, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(1750, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(1800, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(1850, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(1900, 300, 'ground').setScale(0.25).refreshBody();
+
+    platforms.create(2110, 430, 'ground').setScale(0.25).refreshBody();
+
+    //FINAL PLATFORMS
+    platforms.create(2150, 175, 'ground').setScale(0.25).refreshBody();
+    platforms.create(2200, 175, 'ground').setScale(0.25).refreshBody();
+    platforms.create(2250, 175, 'ground').setScale(0.25).refreshBody();
+    platforms.create(2300, 175, 'ground').setScale(0.25).refreshBody();
+    platforms.create(2350, 175, 'ground').setScale(0.25).refreshBody();
+    platforms.create(2400, 175, 'ground').setScale(0.25).refreshBody();
+    platforms.create(2450, 175, 'ground').setScale(0.25).refreshBody();
+    platforms.create(2500, 175, 'ground').setScale(0.25).refreshBody();
+    platforms.create(2550, 175, 'ground').setScale(0.25).refreshBody();
+    platforms.create(2600, 175, 'ground').setScale(0.25).refreshBody();
+    
+    
 
     this.physics.add.collider(player, platforms);
     this.physics.world.bounds.width = 2822;
