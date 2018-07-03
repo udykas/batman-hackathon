@@ -10,7 +10,7 @@ class GameMenu extends Scene {
   }
 
   create() {
-    this.button = this.add.sprite(400, 300, 'gameMenu').setInteractive();
+    this.button = this.add.sprite(400, 595, 'gameMenu').setInteractive();
     this.button.on('pointerdown', () => {
       this.scene.start('MainGameScene')
     });
