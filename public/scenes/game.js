@@ -171,7 +171,7 @@ class MainGameScene extends Scene {
     })
 
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: 'white' });
-
+    scoreText.setScrollFactor(0);
 
     //PHYSICS
     this.physics.add.collider(player, platforms);
@@ -186,7 +186,6 @@ class MainGameScene extends Scene {
     this.cameras.main.setBounds(0, 0, 2822, 384);
     // make the camera follow the player
     this.cameras.main.startFollow(player);
-    
     
   }
 
