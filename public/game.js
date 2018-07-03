@@ -1,5 +1,6 @@
 const gameMenu = require('./scenes/game_menu');
 const mainGameScene = require('./scenes/game');
+const win = require('./scenes/win');
 
 var config = {
   type: Phaser.AUTO,
@@ -12,7 +13,7 @@ var config = {
           debug: false
       }
   },
-  scene: [ gameMenu, mainGameScene ]
+  scene: [ gameMenu, mainGameScene, win ]
 };
 
 var game = new Phaser.Game(config);

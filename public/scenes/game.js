@@ -9,6 +9,7 @@ let batarang;
 let score = 0;
 let scoreText;
 let count = 0; //count to activate action when key is pressed
+let gameMusic;
 
 
 class MainGameScene extends Scene {
@@ -39,7 +40,7 @@ class MainGameScene extends Scene {
 
   create() {
     // gameMusic settings
-    const gameMusic = this.sound.add('gameMusic');
+    gameMusic = this.sound.add('gameMusic');
     gameMusic.play();
     gameMusic.volume = 1;
     
@@ -254,6 +255,11 @@ class MainGameScene extends Scene {
 
     if (cursors.up.isDown && cursors.left.isDown) {
       player.anims.play('up-left', true);
+    }
+
+    if (score >= 10) {
+      this.scene.start('Win');
+      gameMusic.stop();
     }
   }
 
