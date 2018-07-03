@@ -4,6 +4,7 @@ let player;
 let platforms;
 let cursors;
 let foreground;
+let count = 0; //count to activate action when key is pressed
 
 class MainGameScene extends Scene {
   constructor() {
@@ -129,7 +130,6 @@ class MainGameScene extends Scene {
     this.cameras.main.setBounds(0, 0, 2822, 384);
     // make the camera follow the player
     this.cameras.main.startFollow(player);
-
   }
 
   update() {
@@ -140,15 +140,19 @@ class MainGameScene extends Scene {
     else if (cursors.right.isDown) {
       player.setVelocityX(160);
       player.anims.play('right', true);
-    } 
-    else if(cursors.space.isDown) {
-      if(cursors.left.isDown){
+    } else if (cursors.space.duration >= 80 && count < 60) {
+      if (cursors.left.isDown) {
         player.anims.play('punch-left', true);
       }
       player.anims.play('punch', true);
+      count += 1;
     }
     else {
       player.setVelocityX(0);
+
+      cursors.space.duration = 0 // reset space.duration so action 'punch' will stop
+      count = 0 // reset count so action can be reactivate
+
       player.anims.play('stand', true);
     }
 
@@ -172,6 +176,7 @@ class MainGameScene extends Scene {
       player.anims.play('up-left', true);
     }
   }
+
 }
 
 module.exports = MainGameScene;
