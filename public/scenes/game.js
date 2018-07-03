@@ -113,6 +113,13 @@ class MainGameScene extends Scene {
     platforms.create(1425, 300, 'ground').setScale(0.25).refreshBody();
     platforms.create(1475, 300, 'ground').setScale(0.25).refreshBody();
 
+    //FOURTH PLATFORMS
+    platforms.create(1275, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(1325, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(1375, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(1425, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(1475, 300, 'ground').setScale(0.25).refreshBody();
+
 
     this.physics.add.collider(player, platforms);
     this.physics.world.bounds.width = 2822;
