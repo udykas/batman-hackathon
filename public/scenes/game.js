@@ -32,9 +32,15 @@ class MainGameScene extends Scene {
     this.load.spritesheet('crouch', './assets/imgs/crouch.png', { frameWidth: 57, frameHeight: 50 });
     this.load.spritesheet('punch', './assets/imgs/punch.png', { frameWidth: 52, frameHeight: 50 });
     this.load.spritesheet('punch-left', './assets/imgs/punch-left.png', { frameWidth: 52, frameHeight: 50 });
+    this.load.audio('gameMusic', [ './assets/audio/12 Introduce a Little Anarchy.mp3', './assets/aduio/12 Introduce a Little Anarchy.ogg' ]);
   }
 
   create() {
+    // gameMusic settings
+    const gameMusic = this.sound.add('gameMusic');
+    gameMusic.play();
+    gameMusic.volume = 1;
+    
     this.add.image(1411, 185, 'starry-night');
     this.add.image(1411, 310, 'background');
     this.add.image(1411, 390, 'foreground');

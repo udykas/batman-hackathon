@@ -43,11 +43,13 @@ class GameMenu extends Scene {
     // playBtn settings
     playBtn.on('pointerdown', e => {
       this.scene.start('MainGameScene');
+      music.stop();
     });
 
     // playBtnText settings
     playBtnText.on('pointerdown', e => {
       this.scene.start('MainGameScene');
+      music.stop();
     });
 
     setInterval(() => {
