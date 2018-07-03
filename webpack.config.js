@@ -5,5 +5,6 @@ module.exports = {
   output: {
     path: __dirname + '/public',
     filename: 'index.js'
-  }
+  },
+  devtool: 'source-map'
 };
