@@ -21,7 +21,8 @@ class MainGameScene extends Scene {
     this.load.spritesheet('jump', './assets/imgs/jump.png', { frameWidth: 57, frameHeight: 50 });
     this.load.spritesheet('jump-left', './assets/imgs/jump-left.png', { frameWidth: 57, frameHeight: 50 });
     this.load.spritesheet('crouch', './assets/imgs/crouch.png', { frameWidth: 57, frameHeight: 50 });
-    this.load.spritesheet('punch', './assets/imgs/punch.png', { frameWidth: 57, frameHeight: 50 });
+    this.load.spritesheet('punch', './assets/imgs/punch.png', { frameWidth: 52, frameHeight: 50 });
+    this.load.spritesheet('punch-left', './assets/imgs/punch-left.png', { frameWidth: 52, frameHeight: 50 });
   }
 
   create() {
@@ -74,12 +75,19 @@ class MainGameScene extends Scene {
       repeat: -1
     });
 
+    this.anims.create({
+      key: 'punch-left',
+      frames: this.anims.generateFrameNumbers('punch-left', { start: 0, end: 10 }),
+      frameRate: 10,
+      repeat: -1
+    });
+
     cursors = this.input.keyboard.createCursorKeys();
 
     //PLATFORMS
     platforms = this.physics.add.staticGroup();
 
-    platforms.create(300, 950, 'ground').setScale(10).refreshBody();
+    platforms.create(300, 1120, 'ground').setScale(15).refreshBody();
 
     platforms.create(200, 440, 'ground').setScale(0.25).refreshBody();
     platforms.create(300, 410, 'ground').setScale(0.25).refreshBody();
@@ -103,17 +111,20 @@ class MainGameScene extends Scene {
   update() {
     if (cursors.left.isDown) {
       player.setVelocityX(-160);
-
       player.anims.play('left', true);
     }
     else if (cursors.right.isDown) {
       player.setVelocityX(160);
-
       player.anims.play('right', true);
+    } 
+    else if(cursors.space.isDown) {
+      if(cursors.left.isDown){
+        player.anims.play('punch-left', true);
+      }
+      player.anims.play('punch', true);
     }
     else {
       player.setVelocityX(0);
-
       player.anims.play('stand', true);
     }
 
@@ -135,10 +146,6 @@ class MainGameScene extends Scene {
 
     if (cursors.up.isDown && cursors.left.isDown) {
       player.anims.play('up-left', true);
-    }
-
-    if (cursors.space.isDown) {
-      player.anims.play('punch', true);
     }
   }
 }
