@@ -4,6 +4,7 @@ let player;
 let platforms;
 let cursors;
 let foreground;
+let count = 0; //count to activate action when isPressed
 
 class MainGameScene extends Scene {
   constructor() {
@@ -21,7 +22,7 @@ class MainGameScene extends Scene {
     this.load.spritesheet('jump', './assets/imgs/jump.png', { frameWidth: 57, frameHeight: 50 });
     this.load.spritesheet('jump-left', './assets/imgs/jump-left.png', { frameWidth: 57, frameHeight: 50 });
     this.load.spritesheet('crouch', './assets/imgs/crouch.png', { frameWidth: 57, frameHeight: 50 });
-    this.load.spritesheet('punch', './assets/imgs/punch.png', { frameWidth: 57, frameHeight: 50 });
+    this.load.spritesheet('punch', './assets/imgs/punch.png', { frameWidth: 52, frameHeight: 50 });
   }
 
   create() {
@@ -97,7 +98,6 @@ class MainGameScene extends Scene {
     this.cameras.main.setBounds(0, 0, 2822, 384);
     // make the camera follow the player
     this.cameras.main.startFollow(player);
-
   }
 
   update() {
@@ -110,9 +110,15 @@ class MainGameScene extends Scene {
       player.setVelocityX(160);
 
       player.anims.play('right', true);
+    } else if (cursors.space.duration >= 80 && count < 60) {
+      count += 1;
+      player.anims.play('punch', true);
     }
     else {
       player.setVelocityX(0);
+
+      cursors.space.duration = 0 // reset space.duration so action 'punch' will stop
+      count = 0 // reset count so action can be reactivate
 
       player.anims.play('stand', true);
     }
@@ -141,6 +147,7 @@ class MainGameScene extends Scene {
       player.anims.play('punch', true);
     }
   }
+
 }
 
 module.exports = MainGameScene;
