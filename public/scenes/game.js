@@ -4,6 +4,10 @@ let player;
 let platforms;
 let cursors;
 let foreground;
+let enemy;
+let batarang;
+let score = 0;
+let scoreText;
 let count = 0; //count to activate action when key is pressed
 
 class MainGameScene extends Scene {
@@ -13,9 +17,11 @@ class MainGameScene extends Scene {
 
   preload() {
     this.load.image('background', './assets/imgs/background.png');
-    this.load.image('foreground', './assets/imgs/foreground.png');
+    this.load.image('foreground', './assets/imgs/gc-buildings.png');
     this.load.image('void', './assets/imgs/Solid_black.png');
     this.load.image('ground', './assets/imgs/platform.png');
+    this.load.image('batarang', './assets/imgs/batarang.png');
+    this.load.spritesheet('enemy', './assets/imgs/enemy.png', { frameWidth: 48, frameHeight: 55 });
     this.load.spritesheet('stand', './assets/imgs/stand2.png', { frameWidth: 41.8, frameHeight: 55 });
     this.load.spritesheet('run-left', './assets/imgs/run-left.png', { frameWidth: 57, frameHeight: 50 });
     this.load.spritesheet('run-right', './assets/imgs/run-right.png', { frameWidth: 57, frameHeight: 50 });
@@ -28,7 +34,7 @@ class MainGameScene extends Scene {
 
   create() {
     this.add.image(1411, 150, 'background');
-    this.add.image(1411, 490, 'foreground');
+    this.add.image(1411, 410, 'foreground');
 
     player = this.physics.add.sprite(100, 450, 'stand').setScale(1.15);
     player.setCollideWorldBounds(true);
@@ -111,17 +117,9 @@ class MainGameScene extends Scene {
     platforms.create(1275, 300, 'ground').setScale(0.25).refreshBody();
     platforms.create(1325, 300, 'ground').setScale(0.25).refreshBody();
     platforms.create(1375, 300, 'ground').setScale(0.25).refreshBody();
-    platforms.create(1425, 300, 'ground').setScale(0.25).refreshBody();
-    platforms.create(1475, 300, 'ground').setScale(0.25).refreshBody();
+   
 
     //FOURTH PLATFORMS
-    platforms.create(1275, 300, 'ground').setScale(0.25).refreshBody();
-    platforms.create(1325, 300, 'ground').setScale(0.25).refreshBody();
-    platforms.create(1375, 300, 'ground').setScale(0.25).refreshBody();
-    platforms.create(1425, 300, 'ground').setScale(0.25).refreshBody();
-    platforms.create(1475, 300, 'ground').setScale(0.25).refreshBody();
-
-    //FIFTH PLATFORMS
     platforms.create(1700, 300, 'ground').setScale(0.25).refreshBody();
     platforms.create(1750, 300, 'ground').setScale(0.25).refreshBody();
     platforms.create(1800, 300, 'ground').setScale(0.25).refreshBody();
@@ -142,16 +140,37 @@ class MainGameScene extends Scene {
     platforms.create(2550, 175, 'ground').setScale(0.25).refreshBody();
     platforms.create(2600, 175, 'ground').setScale(0.25).refreshBody();
     
-    
+    //COLLECTABLES
+    batarang = this.physics.add.group({
+      key: 'batarang',
+      repeat: 18,
+      setXY: { x: 50, y: 0, stepX: 150 }
+    });
 
+    batarang.children.iterate(function (child) {
+      child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    })
+
+    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: 'white' });
+
+    console.log(this.scoreText)
+
+
+    //PHYSICS
     this.physics.add.collider(player, platforms);
+    this.physics.add.collider(batarang, platforms);
+
     this.physics.world.bounds.width = 2822;
+
+    this.physics.add.overlap(player, batarang, collectBats, null, this);
 
     //CAMERA
     // set bounds so the camera won't go outside the game world
     this.cameras.main.setBounds(0, 0, 2822, 384);
     // make the camera follow the player
     this.cameras.main.startFollow(player);
+
+    
   }
 
   update() {
@@ -199,6 +218,14 @@ class MainGameScene extends Scene {
     }
   }
 
+}
+
+function collectBats (player, batarang)
+{
+    batarang.disableBody(true, true);
+
+    score += 10;
+    scoreText.setText('Score: ' + score);
 }
 
 module.exports = MainGameScene;
