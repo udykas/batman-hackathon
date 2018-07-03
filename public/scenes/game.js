@@ -21,6 +21,7 @@ class MainGameScene extends Scene {
     this.load.spritesheet('jump', './assets/imgs/jump.png', { frameWidth: 57, frameHeight: 50 });
     this.load.spritesheet('jump-left', './assets/imgs/jump-left.png', { frameWidth: 57, frameHeight: 50 });
     this.load.spritesheet('crouch', './assets/imgs/crouch.png', { frameWidth: 57, frameHeight: 50 });
+    this.load.spritesheet('punch', './assets/imgs/punch.png', { frameWidth: 57, frameHeight: 50 });
   }
 
   create() {
@@ -34,7 +35,7 @@ class MainGameScene extends Scene {
     //  Our player animations, turning, walking left and walking right.
     this.anims.create({
       key: 'left',
-      frames: this.anims.generateFrameNumbers('run-left', { start: 0, end: 19 }),
+      frames: this.anims.generateFrameNumbers('run-left', { start: 0, end: 18 }),
       frameRate: 10,
       repeat: -1
     });
@@ -47,7 +48,7 @@ class MainGameScene extends Scene {
 
     this.anims.create({
       key: 'right',
-      frames: this.anims.generateFrameNumbers('run-right', { start: 0, end: 16 }),
+      frames: this.anims.generateFrameNumbers('run-right', { start: 0, end: 18 }),
       frameRate: 10,
       repeat: -1
     });
@@ -66,13 +67,26 @@ class MainGameScene extends Scene {
       repeat: -1
     });
 
+    this.anims.create({
+      key: 'punch',
+      frames: this.anims.generateFrameNumbers('punch', { start: 0, end: 10 }),
+      frameRate: 10,
+      repeat: -1
+    });
+
     cursors = this.input.keyboard.createCursorKeys();
 
     //PLATFORMS
     platforms = this.physics.add.staticGroup();
 
-    platforms.create(400, 690, 'ground').setScale(3).refreshBody();
-    platforms.create(800, 690, 'ground');
+    platforms.create(300, 950, 'ground').setScale(10).refreshBody();
+
+    platforms.create(200, 440, 'ground').setScale(0.25).refreshBody();
+    platforms.create(300, 410, 'ground').setScale(0.25).refreshBody();
+    platforms.create(400, 410, 'ground').setScale(0.25).refreshBody();
+    platforms.create(450, 410, 'ground').setScale(0.25).refreshBody();
+    platforms.create(500, 410, 'ground').setScale(0.25).refreshBody();
+    
 
 
     this.physics.add.collider(player, platforms);
@@ -120,6 +134,10 @@ class MainGameScene extends Scene {
 
     if(cursors.up.isDown && cursors.left.isDown){
       player.anims.play('up-left', true);
+    }
+
+    if(cursors.space.isDown){
+      player.anims.play('punch', true);
     }
   }
 }
