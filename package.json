@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon app.js",
     "build": "webpack",
-    "watch": "wabpack-cli --watch"
+    "watch": "webpack-cli --watch"
   },
   "keywords": [],
   "author": "",
