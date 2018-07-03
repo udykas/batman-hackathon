@@ -58,7 +58,7 @@ class MainGameScene extends Scene {
       frameRate: 1,
       repeat: -1
     });
-  
+
     this.anims.create({
       key: 'up-left',
       frames: this.anims.generateFrameNumbers('jump-left', { start: 0, end: 2 }),
@@ -76,6 +76,7 @@ class MainGameScene extends Scene {
 
 
     this.physics.add.collider(player, platforms);
+    this.physics.world.bounds.width = 2822;
 
     //CAMERA
     // set bounds so the camera won't go outside the game world
@@ -89,36 +90,36 @@ class MainGameScene extends Scene {
     if (cursors.left.isDown) {
       player.setVelocityX(-160);
 
-        player.anims.play('left', true);
+      player.anims.play('left', true);
     }
     else if (cursors.right.isDown) {
-        player.setVelocityX(160);
+      player.setVelocityX(160);
 
-        player.anims.play('right', true);
+      player.anims.play('right', true);
     }
     else {
-        player.setVelocityX(0);
+      player.setVelocityX(0);
 
-        player.anims.play('stand', true);
+      player.anims.play('stand', true);
     }
 
-    if (cursors.up.isDown){
+    if (cursors.up.isDown) {
       player.anims.play('up', true);
 
-      if(player.body.touching.down) {
+      if (player.body.touching.down) {
         player.setVelocityY(-400);
       }
-    } 
+    }
 
-    if(!player.body.touching.down) {
+    if (!player.body.touching.down) {
       player.anims.play('up', true);
 
-      if(cursors.left.isDown){
+      if (cursors.left.isDown) {
         player.anims.play('up-left', true);
       }
     }
 
-    if(cursors.up.isDown && cursors.left.isDown){
+    if (cursors.up.isDown && cursors.left.isDown) {
       player.anims.play('up-left', true);
     }
   }
