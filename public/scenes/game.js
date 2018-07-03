@@ -4,7 +4,6 @@ let player;
 let platforms;
 let cursors;
 let foreground;
-let enemies;
 let batarang;
 let score = 0;
 let scoreText;
@@ -25,8 +24,6 @@ class MainGameScene extends Scene {
     this.load.image('ground', './assets/imgs/blk-ground.png');
     this.load.image('platform', './assets/imgs/sml-platform.png');
     this.load.image('batarang', './assets/imgs/batarang.png');
-    this.load.spritesheet('hang-around', './assets/imgs/enemy.png', { frameWidth: 221, frameHeight: 210 });
-    this.load.spritesheet('enemy', './assets/imgs/enemy.png', { frameWidth: 48, frameHeight: 55 });
     this.load.spritesheet('stand', './assets/imgs/stand2.png', { frameWidth: 41.8, frameHeight: 55 });
     this.load.spritesheet('run-left', './assets/imgs/run-left.png', { frameWidth: 57, frameHeight: 50 });
     this.load.spritesheet('run-right', './assets/imgs/run-right.png', { frameWidth: 57, frameHeight: 50 });
@@ -98,13 +95,6 @@ class MainGameScene extends Scene {
       key: 'punch-left',
       frames: this.anims.generateFrameNumbers('punch-left', { start: 0, end: 10 }),
       frameRate: 10,
-      repeat: -1
-    });
-
-    this.anims.create({
-      key: 'hang-around',
-      frames: this.anims.generateFrameNumbers('hang-around', { start: 0, end: 15 }),
-      frameRate: 5,
       repeat: -1
     });
 
@@ -189,10 +179,6 @@ class MainGameScene extends Scene {
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: 'white' });
     scoreText.setScrollFactor(0);
 
-    //ENEMIES
-    enemies = this.physics.add.staticGroup();
-    enemies.create(440, 560, 'hang-around').setScale(0.2).refreshBody();
-
     //PHYSICS
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(batarang, platforms);
@@ -226,10 +212,6 @@ class MainGameScene extends Scene {
     }
     else {
       player.setVelocityX(0);
-
-      enemies.children.iterate(function (e) {
-        e.anims.play('hang-around', true);
-      })
 
       cursors.space.duration = 0 // reset space.duration so action 'punch' will stop
       count = 0 // reset count so action can be reactivate
