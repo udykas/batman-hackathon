@@ -86,7 +86,7 @@ class MainGameScene extends Scene {
     platforms.create(400, 410, 'ground').setScale(0.25).refreshBody();
     platforms.create(450, 410, 'ground').setScale(0.25).refreshBody();
     platforms.create(500, 410, 'ground').setScale(0.25).refreshBody();
-    
+
 
 
     this.physics.add.collider(player, platforms);
@@ -137,7 +137,7 @@ class MainGameScene extends Scene {
       player.anims.play('up-left', true);
     }
 
-    if(cursors.space.isDown){
+    if (cursors.space.isDown) {
       player.anims.play('punch', true);
     }
   }
