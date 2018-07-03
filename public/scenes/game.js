@@ -141,10 +141,10 @@ class MainGameScene extends Scene {
     platforms.create(2500, 175, 'ground').setScale(0.25).refreshBody();
     platforms.create(2550, 175, 'ground').setScale(0.25).refreshBody();
     platforms.create(2600, 175, 'ground').setScale(0.25).refreshBody();
-    
-    
 
-    this.physics.add.collider(player, platforms);
+
+
+    this.physics.add.collider(player, platforms)
     this.physics.world.bounds.width = 2822;
 
     //CAMERA
