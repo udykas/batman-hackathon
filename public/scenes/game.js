@@ -4,7 +4,7 @@ let player;
 let platforms;
 let cursors;
 let foreground;
-let count = 0; //count to activate action when isPressed
+let count = 0; //count to activate action when key is pressed
 
 class MainGameScene extends Scene {
   constructor() {
