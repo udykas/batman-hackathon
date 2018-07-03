@@ -23,6 +23,7 @@ class MainGameScene extends Scene {
     this.load.spritesheet('jump-left', './assets/imgs/jump-left.png', { frameWidth: 57, frameHeight: 50 });
     this.load.spritesheet('crouch', './assets/imgs/crouch.png', { frameWidth: 57, frameHeight: 50 });
     this.load.spritesheet('punch', './assets/imgs/punch.png', { frameWidth: 52, frameHeight: 50 });
+    this.load.spritesheet('punch-left', './assets/imgs/punch-left.png', { frameWidth: 52, frameHeight: 50 });
   }
 
   create() {
@@ -75,19 +76,43 @@ class MainGameScene extends Scene {
       repeat: -1
     });
 
+    this.anims.create({
+      key: 'punch-left',
+      frames: this.anims.generateFrameNumbers('punch-left', { start: 0, end: 10 }),
+      frameRate: 10,
+      repeat: -1
+    });
+
     cursors = this.input.keyboard.createCursorKeys();
 
     //PLATFORMS
     platforms = this.physics.add.staticGroup();
 
-    platforms.create(300, 950, 'ground').setScale(10).refreshBody();
+    //FLOOR
+    platforms.create(300, 1120, 'ground').setScale(15).refreshBody();
 
+    //FIRST PLATFORMS
     platforms.create(200, 440, 'ground').setScale(0.25).refreshBody();
     platforms.create(300, 410, 'ground').setScale(0.25).refreshBody();
     platforms.create(400, 410, 'ground').setScale(0.25).refreshBody();
     platforms.create(450, 410, 'ground').setScale(0.25).refreshBody();
     platforms.create(500, 410, 'ground').setScale(0.25).refreshBody();
 
+    //SECOND PLATFORMS
+    platforms.create(700, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(750, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(800, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(850, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(900, 300, 'ground').setScale(0.25).refreshBody();
+
+    platforms.create(1090, 150, 'ground').setScale(0.25).refreshBody();
+
+    //THIRD PLATFORMS
+    platforms.create(1275, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(1325, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(1375, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(1425, 300, 'ground').setScale(0.25).refreshBody();
+    platforms.create(1475, 300, 'ground').setScale(0.25).refreshBody();
 
 
     this.physics.add.collider(player, platforms);
@@ -103,16 +128,17 @@ class MainGameScene extends Scene {
   update() {
     if (cursors.left.isDown) {
       player.setVelocityX(-160);
-
       player.anims.play('left', true);
     }
     else if (cursors.right.isDown) {
       player.setVelocityX(160);
-
       player.anims.play('right', true);
     } else if (cursors.space.duration >= 80 && count < 60) {
-      count += 1;
+      if (cursors.left.isDown) {
+        player.anims.play('punch-left', true);
+      }
       player.anims.play('punch', true);
+      count += 1;
     }
     else {
       player.setVelocityX(0);
@@ -141,10 +167,6 @@ class MainGameScene extends Scene {
 
     if (cursors.up.isDown && cursors.left.isDown) {
       player.anims.play('up-left', true);
-    }
-
-    if (cursors.space.isDown) {
-      player.anims.play('punch', true);
     }
   }
 
