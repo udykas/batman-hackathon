@@ -22,7 +22,7 @@ Built With
 `Express` - The web framework used
 
 Authors
-Thuy Pham, Brandon Benefield, Alex Dykas, Andrew Kolumbic, Brandon Hopper
+Alex Dykas, Thuy Pham, Brandon Benefield, Andrew Kolumbic, Brandon Hopper
 
 License
 This project is licensed under the MIT License - see the LICENSE.md file for details
